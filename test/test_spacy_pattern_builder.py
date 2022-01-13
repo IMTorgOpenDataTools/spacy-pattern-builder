@@ -207,26 +207,25 @@ class TestSpacyPatternBuilder(object):
             match_tokens_variant = sorted(match_tokens_variant, key=lambda t: t.i)
             assert match_tokens_variant in matches
 
-    # def test_yield_pattern_permutations(self):
-    #     doc = doc1
-    #     match_example = util.idxs_to_tokens(doc, [0, 1, 3])  # [We, introduce, methods]
-    #     feature_dict = {'DEP': 'dep_', 'TAG': 'tag_', 'LOWER': 'lower_'}
-    #     pattern = build_dependency_pattern(doc, match_example, feature_dict)
-
-    #     feature_sets = (('DEP', 'TAG'), ('DEP', 'TAG', 'LOWER'))
-    #     pattern_variants = list(yield_pattern_permutations(pattern, feature_sets))
-    #     assert not util.list_contains_duplicates(pattern_variants)
-    #     n_variants = len(pattern_variants)
-    #     assert n_variants == len(feature_sets) ** len(pattern)
-    #     for pattern_variant in pattern_variants:
-    #         matches = match.find_matches(doc, pattern_variant)
-    #         assert match_example in matches
-
-    #     feature_sets = (('DEP',), ('DEP', 'TAG'), ('DEP', 'TAG', 'LOWER'))
-    #     pattern_variants = list(yield_pattern_permutations(pattern, feature_sets))
-    #     assert not util.list_contains_duplicates(pattern_variants)
-    #     n_variants = len(pattern_variants)
-    #     assert n_variants == len(feature_sets) ** len(pattern)
-    #     for pattern_variant in pattern_variants:
-    #         matches = match.find_matches(doc, pattern_variant)
-    #         assert match_example in matches
+    def test_yield_pattern_permutations(self):
+        doc = doc1
+        match_example = util.idxs_to_tokens(doc, [0, 1, 3])  # [We, introduce, methods]
+        feature_dict = {'DEP': 'dep_', 'TAG': 'tag_', 'LOWER': 'lower_'}
+        pattern = build_dependency_pattern(doc, match_example, feature_dict)
+        feature_sets = (('DEP', 'TAG'), ('DEP', 'TAG', 'LOWER'))
+        pattern_variants = list(yield_pattern_permutations(pattern, feature_sets))
+        assert not util.list_contains_duplicates(pattern_variants)
+        n_variants = len(pattern_variants)
+        assert n_variants == len(feature_sets) ** len(pattern)
+        for pattern_variant in pattern_variants:
+            matches = match.find_matches(doc, pattern_variant)
+            assert match_example in matches
+        feature_sets = (('DEP',), ('DEP', 'TAG'), ('DEP', 'TAG', 'LOWER'))
+        pattern_variants = list(yield_pattern_permutations(pattern, feature_sets))
+        assert not util.list_contains_duplicates(pattern_variants)
+        n_variants = len(pattern_variants)
+        assert n_variants == len(feature_sets) ** len(pattern)
+        for pattern_variant in pattern_variants:
+            matches = match.find_matches(doc, pattern_variant)
+            assert match_example in matches
+    
