@@ -58,10 +58,12 @@ def yield_node_level_pattern_variants(pattern, match_tokens, feature_dicts, muta
 
 
 def yield_extended_trees(match_tokens):
-    min_depth = min([t._.depth for t in match_tokens])
+    #min_depth = min([t._.depth for t in match_tokens])
+    min_depth = min([t._.syntactic_depth for t in match_tokens])
     extend_by = []
     for token in match_tokens:
-        is_root = token._.depth == min_depth
+        #is_root = token._.depth == min_depth
+        is_root = token._.syntactic_depth == min_depth
         if is_root:
             extend_by.append(token.head)
         extend_by += token.children

@@ -18,6 +18,9 @@ def syntactic_depth(token):
 Token.set_extension('_syntactic_depth', default=None, force=True)
 Token.set_extension('syntactic_depth', getter=syntactic_depth, force=True)
 
+#Token.set_extension('_depth', default=None, force=True)
+#Token.set_extension('depth', getter=depth, force=True)
+
 def filter_by_depth(depths, tokens):
     if isinstance(depths, int):
         depths = set([depths])
