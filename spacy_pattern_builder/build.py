@@ -48,7 +48,7 @@ def build_pattern_element(token, feature_dict, nbor=None, operator='>'):
 
 
 def build_dependency_pattern(doc, match_tokens, feature_dict=DEFAULT_BUILD_PATTERN_FEATURE_DICT, nx_graph=None):
-    '''Build a depedency pattern for use with DependencyTreeMatcher that will match the set of tokens provided in "match_tokens". This set of tokens must form a fully connected graph.
+    '''Build a depedency pattern for use with DependencyMatcher that will match the set of tokens provided in "match_tokens". This set of tokens must form a fully connected graph.
 
     Arguments:
         doc {SpaCy Doc object}
@@ -57,7 +57,7 @@ def build_dependency_pattern(doc, match_tokens, feature_dict=DEFAULT_BUILD_PATTE
         nx_graph {NetworkX object} -- graph representing the doc dependency tree
 
     Returns:
-        [list] -- Dependency pattern in the format consumed by SpaCy's DependencyTreeMatcher
+        [list] -- Dependency pattern in the format consumed by SpaCy's DependencyMatcher
     '''
     # Checks
     if not nx_graph:

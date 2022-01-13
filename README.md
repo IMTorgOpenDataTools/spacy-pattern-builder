@@ -60,7 +60,7 @@ pprint(pattern)  # In the format consumed by SpaCy's DependencyMatcher:
 # Create a matcher and add the newly generated pattern
 from spacy.matcher import DependencyMatcher
 
-matcher = DependencyTreeMatcher(doc.vocab)
+matcher = DependencyMatcher(doc.vocab)
 matcher.add('pattern', None, pattern)
 
 # And get matches

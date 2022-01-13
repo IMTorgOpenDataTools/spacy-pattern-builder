@@ -29,7 +29,7 @@ feature_dict = {  # This here is equal to the default feature_dict
 pattern = build_dependency_pattern(doc, match_tokens, feature_dict=feature_dict)
 
 from pprint import pprint
-pprint(pattern)  # In the format consumed by SpaCy's DependencyTreeMatcher:
+pprint(pattern)  # In the format consumed by SpaCy's DependencyMatcher:
 '''
 [{'PATTERN': {'DEP': 'ROOT', 'TAG': 'VBP'}, 'SPEC': {'NODE_NAME': 'node1'}},
  {'PATTERN': {'DEP': 'nsubj', 'TAG': 'PRP'},
@@ -39,9 +39,9 @@ pprint(pattern)  # In the format consumed by SpaCy's DependencyTreeMatcher:
 '''
 
 # Create a matcher and add the newly generated pattern
-from spacy.matcher import DependencyTreeMatcher
+from spacy.matcher import DependencyMatcher
 
-matcher = DependencyTreeMatcher(doc.vocab)
+matcher = DependencyMatcher(doc.vocab)
 matcher.add('pattern', None, pattern)
 
 # And match away
