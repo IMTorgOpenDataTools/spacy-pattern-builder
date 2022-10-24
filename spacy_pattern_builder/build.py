@@ -28,7 +28,24 @@ def node_features(token, feature_dict):
     return node_features
 
 
-def build_pattern_element(token, feature_dict, nbor=None, operator='>'):
+def build_pattern_elementv3(token, feature_dict, nbor=None, operator='>'):
+    features = node_features(token, feature_dict)
+    if not nbor:
+        pattern_element = {
+            'RIGHT_ID': node_name(token),
+            'RIGHT_ATTRS': features
+        }
+    else:
+        pattern_element = {
+            'LEFT_ID': node_name(nbor),
+            'REL_OP': operator,
+            'RIGHT_ID': node_name(token),
+            'RIGHT_ATTRS': features
+        }
+    return pattern_element
+
+
+def build_pattern_elementv2(token, feature_dict, nbor=None, operator='>'):
     features = node_features(token, feature_dict)
     if not nbor:
         pattern_element = {
@@ -44,7 +61,7 @@ def build_pattern_element(token, feature_dict, nbor=None, operator='>'):
             },
             'PATTERN': features
         }
-    return pattern_element
+    return pattern_element    
 
 
 def build_dependency_pattern(doc, match_tokens, feature_dict=DEFAULT_BUILD_PATTERN_FEATURE_DICT, nx_graph=None):
@@ -75,7 +92,7 @@ def build_dependency_pattern(doc, match_tokens, feature_dict=DEFAULT_BUILD_PATTE
     match_tokens = util.sort_by_depth(match_tokens)  # Iterate through tokens in descending depth order
     dependency_pattern = []
     root_token = match_tokens[0]
-    pattern_element = build_pattern_element(root_token, feature_dict, operator='>')
+    pattern_element = build_pattern_elementv3(root_token, feature_dict, operator='>')
     dependency_pattern.append(pattern_element)
     tokens_in_pattern = [root_token]
     non_root_tokens = match_tokens[1:]
@@ -85,14 +102,14 @@ def build_dependency_pattern(doc, match_tokens, feature_dict=DEFAULT_BUILD_PATTE
         left_siblings_in_pattern = [t for t in left_siblings if t in tokens_in_pattern]
         if left_siblings_in_pattern:
             last_left_sibling_in_pattern = left_siblings_in_pattern[-1]
-            pattern_element = build_pattern_element(
+            pattern_element = build_pattern_elementv3(
                 token, feature_dict, nbor=last_left_sibling_in_pattern, operator='$--')
             dependency_pattern.append(pattern_element)
         else:  # Parent-child relation
             head = token.head
             if head not in match_tokens:
                 raise TokenNotInMatchTokensError('Head token not in match_tokens. Is match_tokens fully connected?')
-            pattern_element = build_pattern_element(token, feature_dict, nbor=head, operator='>')
+            pattern_element = build_pattern_elementv3(token, feature_dict, nbor=head, operator='>')
             dependency_pattern.append(pattern_element)
         tokens_in_pattern.append(token)
     return dependency_pattern

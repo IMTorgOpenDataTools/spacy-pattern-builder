@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-spacy = "==2.*"
 networkx = "*"
 pytest = "*"
+spacy = "==3.4"
 
 [dev-packages]
 
