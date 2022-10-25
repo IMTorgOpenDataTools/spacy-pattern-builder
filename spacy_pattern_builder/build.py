@@ -103,7 +103,7 @@ def build_dependency_pattern(doc, match_tokens, feature_dict=DEFAULT_BUILD_PATTE
         if left_siblings_in_pattern:
             last_left_sibling_in_pattern = left_siblings_in_pattern[-1]
             pattern_element = build_pattern_elementv3(
-                token, feature_dict, nbor=last_left_sibling_in_pattern, operator='$--')
+                token, feature_dict, nbor=last_left_sibling_in_pattern, operator='$++')
             dependency_pattern.append(pattern_element)
         else:  # Parent-child relation
             head = token.head

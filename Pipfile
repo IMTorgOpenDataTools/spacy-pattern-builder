@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 networkx = "*"
 pytest = "*"
-spacy = "==3.4"
+spacy = "*"
 
 [dev-packages]
 

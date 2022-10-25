@@ -1,9 +1,7 @@
 [
   {
-    "SPEC": {
-      "NODE_NAME": "node13"
-    },
-    "PATTERN": {
+    "RIGHT_ID": "node13",
+    "RIGHT_ATTRS": {
       "DEP": "advcl",
       "_": {
         "custom_attr": "my_attr"
@@ -11,12 +9,10 @@
     }
   },
   {
-    "SPEC": {
-      "NODE_NAME": "node15",
-      "NBOR_NAME": "node13",
-      "NBOR_RELOP": ">"
-    },
-    "PATTERN": {
+    "LEFT_ID": "node13",
+    "REL_OP": ">",
+    "RIGHT_ID": "node15",
+    "RIGHT_ATTRS": {
       "DEP": "dobj",
       "_": {
         "custom_attr": "my_attr"
@@ -24,12 +20,10 @@
     }
   },
   {
-    "SPEC": {
-      "NODE_NAME": "node16",
-      "NBOR_NAME": "node15",
-      "NBOR_RELOP": ">"
-    },
-    "PATTERN": {
+    "LEFT_ID": "node15",
+    "REL_OP": "$++",
+    "RIGHT_ID": "node16",
+    "RIGHT_ATTRS": {
       "DEP": "prep",
       "_": {
         "custom_attr": "my_attr"
@@ -37,12 +31,10 @@
     }
   },
   {
-    "SPEC": {
-      "NODE_NAME": "node19",
-      "NBOR_NAME": "node16",
-      "NBOR_RELOP": ">"
-    },
-    "PATTERN": {
+    "LEFT_ID": "node16",
+    "REL_OP": ">",
+    "RIGHT_ID": "node19",
+    "RIGHT_ATTRS": {
       "DEP": "pobj",
       "_": {
         "custom_attr": "my_attr"
