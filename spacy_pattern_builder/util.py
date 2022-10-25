@@ -126,7 +126,7 @@ def list_contains_duplicates(list_):
 def features_are_in_pattern(features, pattern):
     for pattern_element in pattern:
         for feature in features:
-            if feature not in pattern_element['PATTERN']:
+            if feature not in pattern_element['RIGHT_ATTRS']:
                 return False
     return True
 

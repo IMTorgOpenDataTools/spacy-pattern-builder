@@ -17,16 +17,24 @@ def yield_pattern_permutations(pattern, feature_sets):
         )
     pattern_element_combinations = []
     for pattern_element in pattern:
-        token_features = pattern_element['PATTERN']
+        token_features = pattern_element['RIGHT_ATTRS']
         new_pattern_elements = []
         for feature_set in feature_sets:
             new_token_features = {
                 k: v for k, v in token_features.items() if k in feature_set
             }
-            new_pattern_element = {
-                'SPEC': pattern_element['SPEC'],
-                'PATTERN': new_token_features,
-            }
+            if new_token_features['DEP'] == 'ROOT':
+                new_pattern_element = {
+                    'RIGHT_ID': pattern_element['RIGHT_ID'],
+                    'RIGHT_ATTRS': new_token_features
+                }
+            else:
+                new_pattern_element = {
+                    'LEFT_ID': pattern_element['LEFT_ID'],
+                    'REL_OP': pattern_element['REL_OP'],
+                    'RIGHT_ID': pattern_element['RIGHT_ID'],
+                    'RIGHT_ATTRS': new_token_features
+                }
             new_pattern_elements.append(new_pattern_element)
         pattern_element_combinations.append(new_pattern_elements)
     return itertools.product(*pattern_element_combinations)
@@ -34,7 +42,6 @@ def yield_pattern_permutations(pattern, feature_sets):
 
 def yield_node_level_pattern_variants(pattern, match_tokens, feature_dicts, mutate_tokens=[]):
     # Sort tokens by depth and assume to match one-to-one with pattern
-    #TODO:not sure if this is correct
     if not mutate_tokens:
         mutate_tokens = match_tokens
     match_tokens = util.sort_by_depth(match_tokens)

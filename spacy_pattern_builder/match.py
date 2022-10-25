@@ -7,7 +7,7 @@ def build_matcher(vocab, pattern):
     return matcher
 
 
-def find_matchesv2(doc, pattern):
+def find_matches_v2(doc, pattern):
     matcher = build_matcher(doc.vocab, pattern)
     # print(doc, pattern)
     matches = matcher(doc)
